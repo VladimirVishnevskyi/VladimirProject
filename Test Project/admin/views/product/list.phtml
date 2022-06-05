@@ -1,0 +1,25 @@
+<a href="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=product&action=add"><button type="button" class="btn btn-success">Add new Product</button></a>
+<table class="table table-striped">
+      <thead>
+        <tr>
+            <th width="10" scope="col">#Id</th>
+            <th scope="col">First</th>
+            <th width="10">Delete</th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    <?php foreach(\Model\Product\Repository::getAll() as $product):?>
+    <tr>
+        <th scope="row"><?php echo $product->product_id?></th>
+        <th scope="row"><a href="front.php?controller=product&action=update&id=<?php echo $product->product_id?>"><?php echo $product->sku?></a></th>
+        <td><img class="product_img" src="<?=IMJ_URL?><?php  echo $product->image?>" width="300" height="300"></td>
+        <td><a href="#"><?php echo $product->name?></a></td>
+        <td><a href="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=product&action=delete&id=<?php echo $product->product_id?>">
+                <button type="button" class="btn btn-danger">Delete</button></a></td>
+    </tr>
+    <?php endforeach;?>
+    </tbody>
+    </table>
+

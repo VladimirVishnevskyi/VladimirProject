@@ -1,0 +1,27 @@
+
+<a href="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=category&action=add"><button type="button" class="btn btn-success">Add new category</button></a>
+
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="10" scope="col">#Id</th>
+        <th scope="col">First</th>
+        <th width="10">Delete</th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    <?php foreach(\Model\Category\Repository::getAll() as $category):?>
+        <tr>
+            <th scope="row"><?php echo $category->category_id?></th>
+            <td><img class="category_img"src="<?=IMJ_URL?><?php  echo $category->image?>" width="300" height="300"></td>
+            <td><a href="#"><?php echo $category->name?></a></td>
+            <td><a href="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=category&action=delete&id=<?php echo $category->category_id?>">
+                    <button type="button" class="btn btn-danger">Delete</button></a></td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>

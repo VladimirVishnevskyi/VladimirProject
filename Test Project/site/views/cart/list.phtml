@@ -1,0 +1,66 @@
+
+<?php
+    $cart = \Model\Cart\Repository::getCart();
+
+    if(array_key_exists('id',$_GET)) {
+        $product = \Model\Product\Repository::getOne($_GET['id']);
+        $cart->addProduct($product, $_GET['qty']);
+        $_SESSION['message'] = "Товар успешно добавлен в корзину";
+        header("Location: cart.php");
+    }
+
+    if(array_key_exists('delete_id',$_GET)) {
+        $cart->deleteProduct($_GET['delete_id']);
+        header("Location: cart.php");
+    }
+if(array_key_exists('update_id',$_GET)) {
+    $cart->plusQty($_GET['update_id']);
+    header("Location: cart.php");
+}
+    $cartProducts = $cart->getProducts();
+
+?>
+<form  method="post" action="http://dev8.php.mukovoz.com/WebSite/site/front.php?controller=order&action=add" >
+    <div style="color:green"><?php echo @$_SESSION['message']; $_SESSION['message'] = null; ?></div>
+    <?php if(count($cartProducts)==0):?>
+        <h3>You have no products</h3>
+    <?php else:?>
+    <h1 class="cart_title">Cart</h1>
+    <?php foreach($cartProducts as $product):?>
+        <div class="cart_table">
+                <table  width="100%" border="1" >
+                    <th><a href="cart.php?delete_id=<?php echo $product->product_id?>">
+                            <button class="delete-btn" type="submit" >
+                <img src="static/images/delete.jpg" width="25px" height="25px">
+                    </button></a></th>
+                <th ><a href="product.php?id=<?php echo $product->product_id?>"><img class="product_i"  src="<?php echo $product->getImage()?>" width="150px"></a></th>
+                <th ><a href="product.php?id=<?php echo $product->product_id?>"><h3><?php echo $product->name?></h3></a></th>
+                    <th ><a href="cart.php?update_id=<?php echo $product->product_id?>">
+                        <button class="plus-btn" type="button" name="button" >
+                        <img src="static/images/plus.jpg" alt="" width="15px" height="15px"/>
+                        </button></a>
+                    <input class="inp" type="text" name="name" value="<?php echo $product->qty?>">
+                    <button class="minus-btn" type="button" name="button">
+                        <img src="static/images/minus.jpg" alt="" width="15px" height="15px"/>
+                    </button>
+                    </th>
+                <th><?php echo $product->getPriceSumm()?> USD</th>
+                </tr>
+                </table>
+        </div>
+    <?php endforeach;?>
+
+    <div class="total">
+        <table border="1">
+            <tr>
+                <th>Total quantity: <?php echo $cart->getCount()?>pc.</th>
+                <th>Tamount to be paid: <?php echo $cart->getTotal()?> USD
+                    <button class="pay-btn" type="submit" name="button" value="To Pay">To pay
+                    </button></th>
+            </tr>
+        </table>
+    </div>
+    <?php endif;?>
+   </form>
+
+

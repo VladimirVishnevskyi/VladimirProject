@@ -1,0 +1,53 @@
+<?php
+$products = \Model\Product\Repository::getAll();
+?>
+<header class="header">
+    <div class="container">
+        <div class="header_row">
+            <div class="header_content">
+                <h1 class="header_title">The best board games in the world</h1>
+                <div class="header_text">
+                <p>Huge selection of world aimless people. The best puzzles.
+                    World classics of world class.</p>
+                </div>
+                <div class="header_btn">
+                    <a href="category.php" class="button">Shop now</a>
+                </div>
+            </div>
+            <div class="header_photo">
+                <img src="static/images/fon1.jpg" alt="Header photo">
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="featured_section">
+        <div class="container">
+            <div class="section_header">
+                <h2 class="section_header_title">Top sales</h2>
+                <div class="section_header_description">
+                    <p>Hits of this week</p>
+                </div>
+             </div>
+            <div class="product_wrapper">
+
+               <a href="#" class="product_link">
+
+
+                    <?php foreach($products as $product):?>
+                   <div class="product">
+                    <img src="<?php echo $product->getImage()?>" width="300" height="300" alt="Product photo" class="product_img">
+                    <h4 class="product_title"><a href="<?php  echo $product->getUrl()?>"><?php echo $product->name?></a></h4>
+                    <div class="product_price">
+                        <span class="product_price_old"><?php  echo $product->getPrice()?></span>
+                        <span class="product_price_new"><?php  echo $product->getPriceDiscount()?></span>
+                    </div>
+                   </div>
+                    <?php endforeach;?>
+
+               </a>
+
+            </div>
+        </div>
+    </section>
+</main>

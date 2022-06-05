@@ -1,0 +1,22 @@
+<?php
+if ($_GET['action'] == 'update') {
+    $category = \Model\Category\Repository::getOne($_GET['id']);
+} else {
+    $category = new \Model\Category([]);
+}
+?>
+<form  method="post" action="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=category&action=create" enctype="multipart/form-data">
+    <h1>Add new Category</h1>
+    <div>
+        <input type="text" name="name"  value="<?php echo $category->name?>"  placeholder="name" >
+    </div>
+    <div>
+        <input type="file" multiple="true" name="image">
+    </div>
+
+    <?php if ($_GET['action'] != 'update'): ?>
+        <button type="submit" class="btn btn-primary">Add new Category</button>
+    <?php else:?>
+        <button type="submit" class="btn btn-primary">Update</button>
+    <?php endif;?>
+</form>

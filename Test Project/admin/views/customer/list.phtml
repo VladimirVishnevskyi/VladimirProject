@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th width="10" scope="col">#Id</th>
+        <th scope="col">First</th>
+        <th width="10">Delete</th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    <?php foreach (\Model\Customer\Repository::getAll() as $customer): ?>
+        <tr>
+            <th scope="row"><?php echo $customer->customer_id ?></th>
+            <th scope="row"><?php echo $customer->last_name ?></th>
+            <th scope="row"><?php echo $customer->first_name ?></th>
+            <th scope="row"><?php echo $customer->email ?></th>
+            <th scope="row"><?php echo $customer->phone ?></th>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+

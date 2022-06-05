@@ -1,0 +1,25 @@
+<?php
+$product = \Model\Product\Repository::getOne($_GET['id']);
+ ?>
+<a>
+    <div class="product_wrapper">
+            <img class="category_img" src="<?php echo $product->getImage()?> " width="500" height="500">
+            <from class="product_title"><?php echo $product->name?>
+                    <div class="product_price">
+                        <span class="product_price_old"><?php  echo $product->getPrice()?></span>
+                        <span class="product_price_new"><?php  echo $product->getPriceDiscount()?></span>
+                    </div>
+                    <div class="product_description"><?php echo $product->description?>
+                    </div>
+            <?php if ($product->qty > 0):?>
+                <form method="post" action="http://dev8.php.mukovoz.com/WebSite/site/front.php?controller=cart&action=addCart">
+                      <input placeholder="quantity_product" value="1" name="qty" type="number" />
+                      <input name="id" type="hidden" value="<?php echo $product->product_id?>"/>
+                        <input id=add_to_cart_button type="submit" value="to Cart"/>
+            </form>
+             <?php else:?>
+                <div>product not found</div>
+             <?php endif;?>
+    </div>
+</a>
+

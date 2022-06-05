@@ -1,0 +1,15 @@
+<?php
+$products = \Model\Product\Repository::getProductsByCategoryId($_GET['id']);
+?>
+<div class="product_wrapper">
+       <?php foreach($products as $product):?>
+    <div class="product">
+       <a href = "<?php  echo $product->getUrl()?>" class="product_home">
+       <img class="category_img"src="<?php  echo $product->getImage()?>" width="300" height="300">
+           <h5 class="product_title"><a href="<?php  echo $product->getUrl()?>"><?php echo $product->name?></a></h5>
+      </a>
+    </div>
+      <?php endforeach;?>
+</div>
+
+

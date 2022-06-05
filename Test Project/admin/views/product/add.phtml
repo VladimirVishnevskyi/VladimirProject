@@ -1,0 +1,40 @@
+<?php
+if ($_GET['action'] == 'update') {
+    $product = \Model\Product\Repository::getOne($_GET['id']);
+} else {
+    $product = new \Model\Product([]);
+}
+?>
+<form method="post" action="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=product&action=create"
+      enctype="multipart/form-data">
+    <h1>Add new Product</h1>
+<!--    --><?php //if ($_GET['action'] != 'update'): ?>
+        <div>
+            <input type="text" name="name"  value="<?php echo $product->name ?>"placeholder="name">
+        </div>
+        <div>
+            <input type="text" name="sku"  value="<?php echo $product->sku ?>"placeholder="sku">
+        </div>
+        <div>
+            <input type="text" name="type"  value="<?php echo $product->type ?>" placeholder="type">
+        </div>
+        <div>
+            <input type="text" name="description"  value="<?php echo $product->description ?>" placeholder="description">
+        </div>
+
+        <div>
+            <input type="text" name="price"  value="<?php echo $product->price ?>" placeholder="price">
+        </div>
+        <div>
+            <input type="text" name="qty"  value="<?php echo $product->qty ?>" placeholder="qty">
+        </div>
+        <div>
+            <input type="file" name="image[]" multiple="multiple">
+        </div>
+<!--    --><?php //endif; ?>
+    <?php if ($_GET['action'] != 'update'): ?>
+        <button type="submit">Add</button>
+    <?php else: ?>
+        <button type="submit">Update</button>
+    <?php endif; ?>
+</form>

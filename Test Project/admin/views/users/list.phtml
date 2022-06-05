@@ -1,0 +1,27 @@
+
+<a href="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=users&action=add"><button type="button" class="btn btn-success">Add new user</button></a>
+
+
+
+<table class="table table-striped">
+      <thead>
+        <tr>
+            <th width="10" scope="col">#Id</th>
+            <th scope="col">First</th>
+            <th width="10">Delete</th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    <?php foreach(\Model\User\Repository::getAll() as $user):?>
+    <tr>
+        <th scope="row"><?php echo $user->user_id?></th>
+        <td><a href="front.php?controller=users&action=update&id=<?php echo $user->user_id?>"><?php echo $user->login?></a></td>
+        <td><a href="http://dev8.php.mukovoz.com/WebSite/admin/front.php?controller=users&action=delete&id=<?php echo $user->user_id?>">
+                <button type="button" class="btn btn-danger">Delete</button></a></td>
+    </tr>
+    <?php endforeach;?>
+    </tbody>
+    </table>
+

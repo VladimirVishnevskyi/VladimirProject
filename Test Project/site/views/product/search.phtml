@@ -1,0 +1,10 @@
+<?php
+$products = \Model\Product\Repository::searchIn($_GET['query']);
+?>
+
+<?php foreach ($products as $product): ?>
+    <div class="search_result" ><?php echo $product->name?></div>
+    <div class="search_result" ><?php echo $product->sku?></div>
+
+    <a href="<?php  echo $product->getUrl()?>"><img class="category_img" src="<?php  echo $product->getImage()?>" width="300" height="300"></a>
+ <?php endforeach;?>

@@ -1,0 +1,21 @@
+<table class="table table-striped">
+      <thead>
+        <tr>
+            <th width="10" scope="col">#Id</th>
+            <th scope="col">First</th>
+            <th width="10">Delete</th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+    <?php foreach(\Model\Order\Repository::getAll() as $order):?>
+    <tr>
+        <th scope="row"><?php echo $order->order_id?></th>
+        <th scope="row"><?php echo $order->customer_id?></th>
+        <th scope="row"><?php echo $order->payment_method?></th>
+        <th scope="row"><?php echo $order->shipping_method?></th>
+    <?php endforeach;?>
+    </tbody>
+    </table>
+
